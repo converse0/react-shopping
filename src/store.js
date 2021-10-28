@@ -3,6 +3,7 @@ import logger from 'redux-logger';
 
 import rootReducer from './reducers';
 
+// eslint-disable-next-line
 export default () => {
   const store = createStore(rootReducer, applyMiddleware(logger));
 
