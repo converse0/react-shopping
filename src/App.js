@@ -1,23 +1,22 @@
-import logo from './logo.svg';
-import './App.css';
+import { useDispatch, useSelector } from 'react-redux';
+import { setBooks } from './actions/books';
 
 function App() {
+  const dispatch = useDispatch();
+  const books = useSelector(({ books }) => books.books);
+
+  const addBooks = () => {
+    const obj = {
+      id: 0,
+      title: 'Simple book',
+    };
+    dispatch(setBooks([obj]));
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <h1>{books[0].title}</h1>
+      <button onClick={addBooks}>Button</button>
     </div>
   );
 }
