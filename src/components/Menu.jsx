@@ -1,20 +1,29 @@
 import React from 'react';
 
-import { Menu as MenuBase } from 'semantic-ui-react';
+import Cart from '../components/Cart';
 
-const Menu = () => {
+import { Menu as MenuBase, Popup } from 'semantic-ui-react';
+
+const Menu = ({ cartItems, totalPrice }) => {
   return (
     <MenuBase>
       <MenuBase.Item name="browse">Магазин Книг</MenuBase.Item>
 
       <MenuBase.Menu position="right">
         <MenuBase.Item name="signup">
-          Итого: &nbsp;<b>0</b> руб.
+          Итого: &nbsp;<b>{cartItems && totalPrice()}</b> руб.
         </MenuBase.Item>
 
-        <MenuBase.Item name="help">
-          Корзина: &nbsp;(<b>0</b>)
-        </MenuBase.Item>
+        <Popup
+          trigger={
+            <MenuBase.Item name="help">
+              Корзина: &nbsp;(<b>{cartItems.length}</b>)
+            </MenuBase.Item>
+          }
+          content={cartItems && cartItems.map((item) => <Cart key={item.id} {...item} />)}
+          on="click"
+          hideOnScroll
+        />
       </MenuBase.Menu>
     </MenuBase>
   );

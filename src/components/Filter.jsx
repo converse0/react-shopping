@@ -1,8 +1,12 @@
 import React from 'react';
 import { Input, Menu } from 'semantic-ui-react';
 
-const Filter = ({ filterBy, changeFilterBy }) => {
+const Filter = ({ filterBy, changeFilterBy, searchQuery, onChangeInput }) => {
   const handleItemClick = (e, { name }) => changeFilterBy(name);
+
+  const handleInputChange = (e) => {
+    onChangeInput(e.target.value);
+  };
 
   return (
     <Menu secondary>
@@ -23,7 +27,12 @@ const Filter = ({ filterBy, changeFilterBy }) => {
       </Menu.Item>
       <Menu.Menu position="right">
         <Menu.Item>
-          <Input icon="search" placeholder="Search..." />
+          <Input
+            onChange={handleInputChange}
+            value={searchQuery}
+            icon="search"
+            placeholder="Search..."
+          />
         </Menu.Item>
       </Menu.Menu>
     </Menu>
